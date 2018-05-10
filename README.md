@@ -14,6 +14,8 @@ or
 
 ## Features
 
+![Toggle Speed Mod with P](images/speed_toggle.png)
+
 Press P to activate faster gameplay, press P again to slow it to normal speeds.
 
 BattleTech already has a feature to enable faster gameplay, but that was only available through the debug menu. With this mod you now can easily make the game work faster or even slower.
@@ -21,6 +23,10 @@ BattleTech already has a feature to enable faster gameplay, but that was only av
 Setting | Type | Default | Description
 --- | --- | --- | ---
 speedFactor | float | 5 | 1 = normal speed, set this higher or lower to make the speed mod faster or slower.
+
+## Known Bugs
+
+- Can't change the keybinding to another key.
 
 ## Download
 
