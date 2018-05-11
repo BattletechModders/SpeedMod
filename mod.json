@@ -1,5 +1,6 @@
 {
 	"Name": "SpeedMod",
+	"DependsOn": ["DynModLib"],
 	"DLL": "SpeedMod.dll",
 	"DLLEntryPoint": "SpeedMod.Control.Start"
 }
