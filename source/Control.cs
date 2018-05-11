@@ -18,7 +18,7 @@ namespace SpeedMod
 
         public static SpeedSettings settings = new SpeedSettings();
 
-        public static void OnInit(string modDirectory)
+        public static void Start(string modDirectory, string json)
         {
             mod = new Mod(modDirectory);
             mod.LoadSettings(settings);
@@ -85,7 +85,7 @@ namespace SpeedMod
 
                     speedToggled = !speedToggled;
                     
-                    mod.Logger.Log("toggled speed to factor " + settings.speedFactor);
+                    mod.Logger.Log("toggled speed " + speedToggled);
                 }
                 catch (Exception e)
                 {
