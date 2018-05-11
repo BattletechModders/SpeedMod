@@ -1,5 +1,8 @@
 {
 	"Name": "SpeedMod",
+	"Author": "CptMoore",
+	"Website": "https://github.com/CptMoore/SpeedMod",
+
 	"DependsOn": ["DynModLib"],
 	"DLL": "SpeedMod.dll",
 	"DLLEntryPoint": "SpeedMod.Control.Start"
