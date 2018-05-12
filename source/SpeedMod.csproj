@@ -72,6 +72,7 @@
     <Compile Include="AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\mod.json" />
     <None Include="..\README.md" />
     <None Include="..\Settings.json" />
   </ItemGroup>
