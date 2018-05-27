@@ -30,7 +30,7 @@ speedFactor | float | 5 | 1 = normal speed, set this higher or lower to make the
 
 ## Download
 
-Downloads can be found on [github](https://github.com/CptMoore/SpeedMod/releases).
+Downloads can be found on [github](https://github.com/CptMoore/SpeedMod/).
 
 ## Install
 
