@@ -1,4 +1,7 @@
 # SpeedMod
+
+**SINCE BattleTech Patch 1.1 THIS MOD IS NOT NECESSARY ANYMORE**
+
 BattleTech mod (using ModTek and DynModLib) that allows to speed up gameplay.
 
 ## Requirements
