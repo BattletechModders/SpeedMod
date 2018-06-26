@@ -1,3 +1,4 @@
 {
-    "speedFactor" : 5
+	"FastForwardKeyIsToggle":  true,
+	"SpeedUpIsConstant":  true
 }

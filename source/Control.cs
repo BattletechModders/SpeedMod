@@ -1,5 +1,6 @@
 ﻿
 using System;
+using System.Collections.Generic;
 using HBS.Logging;
 using Harmony;
 using System.Reflection;
@@ -14,9 +15,9 @@ namespace SpeedMod
 {
     public static class Control
     {
-        public static Mod mod;
+        private static Mod mod;
 
-        public static SpeedSettings settings = new SpeedSettings();
+        private static SpeedSettings settings = new SpeedSettings();
 
         public static void Start(string modDirectory, string json)
         {
@@ -31,45 +32,18 @@ namespace SpeedMod
             mod.Logger.Log("Loaded " + mod.Name);
         }
 
-        public static PlayerAction SpeedUpAction;
-        public static bool speedToggled;
-
-
         public class SpeedSettings : ModSettings
         {
-            public float speedFactor = 5.0f;
+            public bool FastForwardKeyIsToggle = true;
+            public bool SpeedUpIsConstant = true;
         }
 
-        [HarmonyPatch(typeof(DynamicActions), "CreateWithDefaultBindings")]
-        public static class DynamicActionsCreateWithDefaultBindingsPatch
+        private static PlayerAction SpeedUpAction
         {
-            public static void Postfix(DynamicActions __result)
-            {
-                try
-                {
-                    var adapter = new DynamicActionsAdapter(__result);
-                    SpeedUpAction = adapter.CreatePlayerAction("Toggle Speed Mod");
-                    SpeedUpAction.AddDefaultBinding(Key.P);
-                    mod.Logger.Log("added dynamic action and default key binding");
-                }
-                catch (Exception e)
-                {
-                    mod.Logger.LogError(e);
-                }
-            }
+            get { return BTInput.Instance.Combat_FFCurrentMove(); }
         }
 
-        internal class DynamicActionsAdapter : Adapter<DynamicActions>
-        {
-            internal DynamicActionsAdapter(DynamicActions instance) : base(instance)
-            {
-            }
-
-            internal PlayerAction CreatePlayerAction(string name)
-            {
-                return traverse.Method("CreatePlayerAction", name).GetValue<PlayerAction>(name); ;
-            }
-        }
+        private static bool speedToggled;
 
         [HarmonyPatch(typeof(CombatSelectionHandler), "ProcessInput")]
         public static class CombatSelectionHandlerProcessInputPatch
@@ -78,6 +52,11 @@ namespace SpeedMod
             {
                 try
                 {
+                    if (!Control.settings.FastForwardKeyIsToggle)
+                    {
+                        return;
+                    }
+
                     if (SpeedUpAction == null || !SpeedUpAction.HasChanged || !SpeedUpAction.IsPressed)
                     {
                         return;
@@ -94,18 +73,80 @@ namespace SpeedMod
             }
         }
 
-        [HarmonyPatch(typeof(StackManager), "get_deltaTime")]
-        public static class StackManagerget_deltaTimePatch
+        [HarmonyPatch(typeof(OrderSequence), "OnUpdate")]
+        public static class OrderSequenceOnUpdatePatch
         {
-            public static bool Prefix(StackManager __instance, ref float __result)
+            public static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> instructions)
             {
-                if (speedToggled)
+                return instructions
+                    .MethodReplacer(
+                        AccessTools.Method(typeof(OneAxisInputControl), "get_WasReleased"),
+                        AccessTools.Method(typeof(OrderSequenceOnUpdatePatch), "get_WasReleased")
+                    );
+            }
+
+            public static bool get_WasReleased(OneAxisInputControl @this)
+            {
+                if (Control.settings.FastForwardKeyIsToggle)
                 {
-                    __result = Time.deltaTime * settings.speedFactor;
                     return false;
                 }
 
-                return true;
+                return SpeedUpAction.WasReleased;
+            }
+        }
+
+        [HarmonyPatch(typeof(StackManager), "GetProgressiveDeltaTime", new[] { typeof(float), typeof(bool ) })]
+        public static class StackManagerGetProgressiveDeltaTime1Patch
+        {
+            public static void Prefix(StackManager __instance, ref float t, ref bool isSpedUp, ref float __result)
+            {
+                if (speedToggled)
+                {
+                    isSpedUp = true;
+                }
+            }
+        }
+
+        [HarmonyPatch(typeof(StackManager), "GetProgressiveAttackDeltaTime")]
+        public static class StackManagerGetProgressiveAttackDeltaTimePatch
+        {
+            public static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> instructions)
+            {
+                return instructions
+                    .MethodReplacer(
+                        AccessTools.Method(typeof(StackManager), "get_AttackTimeMultiplier"),
+                        AccessTools.Method(typeof(StackManagerGetProgressiveAttackDeltaTimePatch), "get_AttackTimeMultiplier")
+                    );
+            }
+
+            public static float get_AttackTimeMultiplier(StackManager @this)
+            {
+                var num = @this.AttackTimeMultiplier;
+                if (speedToggled)
+                {
+                    if (Mathf.Approximately(num, 1f))
+                    {
+                        return @this.Combat.Constants.CombatUIConstants.AttackSpeedUpFactor;
+                    }
+                }
+                return num;
+            }
+        }
+
+        [HarmonyPatch(typeof(StackManager), "GetProgressiveDeltaTime", new[] { typeof(float), typeof(float) })]
+        public static class StackManagerGetProgressiveDeltaTime2Patch
+        {
+            public static bool Prefix(StackManager __instance, ref float t, ref float multiplier, ref float __result)
+            {
+                if (!Control.settings.SpeedUpIsConstant)
+                {
+                    return true;
+                }
+
+                __result = __instance.deltaTime * multiplier;
+
+                return false;
             }
         }
     }
