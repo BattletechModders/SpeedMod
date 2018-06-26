@@ -1,6 +1,6 @@
 # SpeedMod
 
-**SINCE BattleTech Patch 1.1 THIS MOD IS NOT NECESSARY ANYMORE**
+**SINCE BattleTech Patch 1.1 THIS MOD IS NOT A NECESSITY ANYMORE**
 
 BattleTech mod (using ModTek and DynModLib) that allows to speed up gameplay.
 
@@ -17,19 +17,16 @@ or
 
 ## Features
 
-![Toggle Speed Mod with P](images/speed_toggle.png)
+BattleTech 1.1 introduced a fast forward key, however it's not a toggle and the animation acceleration feels way off.
 
-Press P to activate faster gameplay, press P again to slow it to normal speeds.
-
-BattleTech already has a feature to enable faster gameplay, but that was only available through the debug menu. With this mod you now can easily make the game work faster or even slower.
+This mod modifies the behavior of the fast forward key and the acceleration curve of the animations.
 
 Setting | Type | Default | Description
 --- | --- | --- | ---
-speedFactor | float | 5 | 1 = normal speed, set this higher or lower to make the speed mod faster or slower.
+FastForwardKeyIsToggle | bool | true | true allows the space bar to be used as a toggle instead of having to spam it at the time
+SpeedUpIsConstant | bool | true | true means that the animations don't accelerate/deaccelerate anymore
 
-## Known Bugs
-
-- Can't change the keybinding to another key.
+The speed up factors are found as json patches in the mod folder, right now I use the same factor the mod used before 1.1 
 
 ## Download
 
