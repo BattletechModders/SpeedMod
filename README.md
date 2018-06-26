@@ -1,4 +1,7 @@
 # SpeedMod
+
+**SINCE BattleTech Patch 1.1 THIS MOD IS NOT NECESSARY ANYMORE**
+
 BattleTech mod (using ModTek and DynModLib) that allows to speed up gameplay.
 
 ## Requirements
@@ -30,7 +33,7 @@ speedFactor | float | 5 | 1 = normal speed, set this higher or lower to make the
 
 ## Download
 
-Downloads can be found on [github](https://github.com/CptMoore/SpeedMod/releases).
+Downloads can be found on [github](https://github.com/CptMoore/SpeedMod/).
 
 ## Install
 
