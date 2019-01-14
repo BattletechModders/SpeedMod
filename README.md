@@ -7,8 +7,7 @@ BattleTech mod (using ModTek and DynModLib) that speeds up gameplay.
 ## Requirements and Installation
 
 * install [DynModLib](https://github.com/CptMoore/DynModLib/releases) using [instructions here](https://github.com/CptMoore/DynModLib)
-
-Put the mod into the \BATTLETECH\Mods\ folder and launch the game.
+* install SpeedMod by putting it into the \BATTLETECH\Mods\ folder
 
 ## Features
 
