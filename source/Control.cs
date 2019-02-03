@@ -36,6 +36,7 @@ namespace SpeedMod
         {
             public bool FastForwardKeyIsToggle = true;
             public bool SpeedUpIsConstant = true;
+            public float SpeedBaseFactor = 1.0f;
         }
 
         private static PlayerAction SpeedUpAction
@@ -52,7 +53,7 @@ namespace SpeedMod
             {
                 try
                 {
-                    if (!Control.settings.FastForwardKeyIsToggle)
+                    if (!settings.FastForwardKeyIsToggle)
                     {
                         return;
                     }
@@ -68,7 +69,7 @@ namespace SpeedMod
                 }
                 catch (Exception e)
                 {
-                    Control.mod.Logger.LogError(e);
+                    mod.Logger.LogError(e);
                 }
             }
         }
@@ -87,7 +88,7 @@ namespace SpeedMod
 
             public static bool get_WasReleased(OneAxisInputControl @this)
             {
-                if (Control.settings.FastForwardKeyIsToggle)
+                if (settings.FastForwardKeyIsToggle)
                 {
                     return false;
                 }
@@ -139,7 +140,9 @@ namespace SpeedMod
         {
             public static bool Prefix(StackManager __instance, ref float t, ref float multiplier, ref float __result)
             {
-                if (!Control.settings.SpeedUpIsConstant)
+                multiplier *= settings.SpeedBaseFactor;
+
+                if (!settings.SpeedUpIsConstant)
                 {
                     return true;
                 }

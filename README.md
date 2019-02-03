@@ -19,6 +19,7 @@ Setting | Type | Default | Description
 --- | --- | --- | ---
 FastForwardKeyIsToggle | bool | true | true allows the space bar to be used as a toggle instead of having to spam it at the time
 SpeedUpIsConstant | bool | true | true means that the animations don't accelerate/deaccelerate anymore
+SpeedBaseFactor | float | 1.0 | this speed multiplier is always applied, useful to speed up / down the game permanently
 
 The speed up factors are found as json patches in the mod folder, right now I use the same factor the mod used before 1.1 
 
