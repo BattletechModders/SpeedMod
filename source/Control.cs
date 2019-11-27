@@ -1,15 +1,13 @@
 ﻿
-using System;
-using System.Collections.Generic;
-using HBS.Logging;
-using Harmony;
-using System.Reflection;
 using BattleTech;
 using BattleTech.UI;
 using DynModLib;
+using Harmony;
 using InControl;
+using System;
+using System.Collections.Generic;
+using System.Reflection;
 using UnityEngine;
-using Logger = HBS.Logging.Logger;
 
 namespace SpeedMod
 {
