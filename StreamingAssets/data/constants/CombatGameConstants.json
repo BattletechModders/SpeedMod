@@ -1,7 +1,7 @@
 {
     "CombatUIConstants":
     {
-        "MoveSpeedUpFactor": 5.0,
+        "MoveSpeedUpFactor": 3.0,
         "AttackSpeedUpFactor": 1.5
 	}
 }
