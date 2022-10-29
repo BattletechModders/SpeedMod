@@ -21,7 +21,6 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <LangVersion>5</LangVersion>
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
@@ -31,7 +30,6 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <LangVersion>5</LangVersion>
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup>
@@ -46,10 +44,6 @@
     </Reference>
     <Reference Include="Assembly-CSharp-firstpass">
       <Private>False</Private>
-    </Reference>
-    <Reference Include="DynModLib">
-      <Private>False</Private>
-      <HintPath>..\..\DynModLib\DynModLib.dll</HintPath>
     </Reference>
     <Reference Include="InControl">
       <Private>False</Private>
@@ -88,6 +82,7 @@
   <ItemGroup>
     <Compile Include="Control.cs" />
     <Compile Include="AssemblyInfo.cs" />
+    <Compile Include="Mod.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\mod.json" />
