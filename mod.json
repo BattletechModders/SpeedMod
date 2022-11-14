@@ -5,5 +5,13 @@
 
 	"DependsOn": [],
 	"DLL": "SpeedMod.dll",
-	"DLLEntryPoint": "SpeedMod.Control.Start"
+	"DLLEntryPoint": "SpeedMod.Control.Start",
+	
+	"Manifest": [
+		{
+			"Type": "AdvancedJSONMerge",
+			"Path": "advancedjsonmerge",
+			"ShouldMergeJSON": false
+		}
+	]
 }
