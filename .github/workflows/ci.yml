@@ -10,7 +10,7 @@ jobs:
         dotnet build --configuration Release -p:BattleTechGameDir="$BATTLETECH_DIR/"
         (
         cd ..
-        INCLUDES="-i!SpeedMod/SpeedMod.dll -i!SpeedMod/LICENSE -i!SpeedMod/mod.json -i!SpeedMod/Settings.json -i!SpeedMod/README.md -ir!SpeedMod/StreamingAssets -ir!SpeedMod/advancedjsonmerge"
+        INCLUDES="-ir!SpeedMod -xr!source -xr!.* -x!*.sln"
         7z a -tzip -mx9 "$DIST_DIR/SpeedMod.zip" $INCLUDES
         )
       release-notes: |
