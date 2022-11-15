@@ -7,11 +7,15 @@ jobs:
     with:
       checkout-directory: 'BATTLETECH/Mods/SpeedMod'
       build-script: |
-        dotnet build --configuration Release -p:BattleTechGameDir="$BATTLETECH_DIR/"
         (
-        cd ..
-        INCLUDES="-ir!SpeedMod -xr!source -xr!.* -x!*.sln"
-        7z a -tzip -mx9 "$DIST_DIR/SpeedMod.zip" $INCLUDES
+          cd source
+          dotnet build -c Release -p:BattleTechGameDir="$BATTLETECH_DIR/"
+        )
+        (
+          cd ..
+          7z a -tzip -mx9 "$DIST_DIR/SpeedMod.zip" \
+            -ir!SpeedMod \
+            -xr!source "-xr!.*"
         )
       release-notes: |
         Works best with ModTek V3
