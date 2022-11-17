@@ -1,16 +1,13 @@
 {
-	"TargetIDs": [
-		"settings"
-	],
+	"TargetID": "settings",
 	"Instructions": [
 		{
 			"JSONPath": "loggerLevels",
-			"Action": "ArrayAdd",
+			"Action": "ArrayConcat",
 			"Value":
-			{
-				"k" : "SpeedMod",
-				"v" : "200"
-			}
+			[
+				{ "k" : "SpeedMod", "v" : "200" }
+			]
 		}
 	]
 }
