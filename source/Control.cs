@@ -30,6 +30,6 @@ public static class Control
 
         var harmony = HarmonyInstance.Create(nameof(SpeedMod));
         harmony.PatchAll(Assembly.GetExecutingAssembly());
-        Log.Log("Loaded");
+        Log.Log("initialized");
     }
 }
