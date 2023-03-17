@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using BattleTech;
-using Harmony;
 using InControl;
 using static SpeedMod.Control;
 

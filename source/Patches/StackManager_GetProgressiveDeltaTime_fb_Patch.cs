@@ -1,5 +1,4 @@
 using BattleTech;
-using Harmony;
 using static SpeedMod.Control;
 
 namespace SpeedMod.Patches;

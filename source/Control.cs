@@ -1,5 +1,4 @@
 ﻿using BattleTech;
-using Harmony;
 using InControl;
 using System.IO;
 using System.Reflection;
