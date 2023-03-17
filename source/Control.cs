@@ -27,8 +27,7 @@ public static class Control
             }
         );
 
-        var harmony = HarmonyInstance.Create(nameof(SpeedMod));
-        harmony.PatchAll(Assembly.GetExecutingAssembly());
+        Harmony.CreateAndPatchAll(Assembly.GetExecutingAssembly(), nameof(SpeedMod));
         Log.Log("initialized");
     }
 }

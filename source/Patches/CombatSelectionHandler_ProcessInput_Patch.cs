@@ -1,5 +1,4 @@
-﻿using System;
-using BattleTech.UI;
+﻿using BattleTech.UI;
 using static SpeedMod.Control;
 
 namespace SpeedMod.Patches;
@@ -7,27 +6,27 @@ namespace SpeedMod.Patches;
 [HarmonyPatch(typeof(CombatSelectionHandler), nameof(CombatSelectionHandler.ProcessInput))]
 internal static class CombatSelectionHandler_ProcessInput_Patch
 {
-    internal static void Prefix()
+    [HarmonyPrefix]
+    [HarmonyWrapSafe]
+    internal static void Prefix(ref bool __runOriginal)
     {
-        try
+        if (!__runOriginal)
         {
-            if (!Settings.FastForwardKeyIsToggle)
-            {
-                return;
-            }
-
-            if (SpeedUpAction == null || !SpeedUpAction.HasChanged || !SpeedUpAction.IsPressed)
-            {
-                return;
-            }
-
-            SpeedToggled = !SpeedToggled;
-
-            Log.Log("toggled speed " + SpeedToggled);
+            return;
         }
-        catch (Exception e)
+
+        if (!Settings.FastForwardKeyIsToggle)
         {
-            Log.LogError(e);
+            return;
         }
+
+        if (SpeedUpAction == null || !SpeedUpAction.HasChanged || !SpeedUpAction.IsPressed)
+        {
+            return;
+        }
+
+        SpeedToggled = !SpeedToggled;
+
+        Log.Log("toggled speed " + SpeedToggled);
     }
 }

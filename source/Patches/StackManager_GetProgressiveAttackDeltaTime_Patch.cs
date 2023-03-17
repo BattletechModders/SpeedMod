@@ -8,6 +8,7 @@ namespace SpeedMod.Patches;
 [HarmonyPatch(typeof(StackManager), nameof(StackManager.GetProgressiveAttackDeltaTime))]
 internal static class StackManager_GetProgressiveAttackDeltaTime_Patch
 {
+    [HarmonyTranspiler]
     internal static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> instructions)
     {
         return instructions

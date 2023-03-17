@@ -6,17 +6,23 @@ namespace SpeedMod.Patches;
 [HarmonyPatch(typeof(StackManager), nameof(StackManager.GetProgressiveDeltaTime), typeof(float), typeof(float))]
 internal static class StackManager_GetProgressiveDeltaTime_ff_Patch
 {
-    internal static bool Prefix(StackManager __instance, ref float multiplier, ref float __result)
+    [HarmonyPrefix]
+    internal static void Prefix(ref bool __runOriginal, StackManager __instance, ref float multiplier, ref float __result)
     {
+        if (!__runOriginal)
+        {
+            return;
+        }
+
         multiplier *= Settings.SpeedBaseFactor;
 
         if (!Settings.SpeedUpIsConstant)
         {
-            return true;
+            return;
         }
 
         __result = __instance.deltaTime * multiplier;
 
-        return false;
+        __runOriginal = false;
     }
 }

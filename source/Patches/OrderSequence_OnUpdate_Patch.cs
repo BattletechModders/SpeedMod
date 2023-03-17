@@ -8,6 +8,7 @@ namespace SpeedMod.Patches;
 [HarmonyPatch(typeof(OrderSequence), nameof(OrderSequence.OnUpdate))]
 internal static class OrderSequence_OnUpdate_Patch
 {
+    [HarmonyTranspiler]
     internal static IEnumerable<CodeInstruction> Transpiler(IEnumerable<CodeInstruction> instructions)
     {
         return instructions
